@@ -1,15 +1,19 @@
 package list
 
 type LinkedList struct {
-	head *Node
-	tail *Node
+	head *node
+	tail *node
 	size int
 }
 
-type Node struct {
+type node struct {
 	value interface{}
-	next  *Node
-	prev *Node
+	next  *node
+	prev *node
+}
+
+func New() *LinkedList {
+	return &LinkedList{}
 }
 
 func (ll *LinkedList) PeekFirst() interface{} {
@@ -31,7 +35,7 @@ func (ll *LinkedList) PollFirst() interface{} {
 }
 
 func (ll *LinkedList) AddFirst(value interface{}) {
-	newNode := &Node{value: value}
+	newNode := &node{value: value}
 	newNode.next = ll.head
 	ll.head = newNode
 	if ll.size == 0 {

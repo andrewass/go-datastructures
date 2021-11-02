@@ -5,7 +5,7 @@ import (
 )
 
 func TestShouldReturnZeroWhenGettingSizeOfEmptyList(t *testing.T){
-	list := LinkedList{}
+	list := New()
 	listSize := list.Size()
 
 	if listSize != 0 {
@@ -14,7 +14,7 @@ func TestShouldReturnZeroWhenGettingSizeOfEmptyList(t *testing.T){
 }
 
 func TestShouldReturnCorrectSizeWhenGettingSizeOfEmptyList(t *testing.T){
-	list := LinkedList{}
+	list := New()
 	list.AddFirst(33)
 	list.AddFirst(22)
 	listSize := list.Size()
@@ -25,7 +25,7 @@ func TestShouldReturnCorrectSizeWhenGettingSizeOfEmptyList(t *testing.T){
 }
 
 func TestShouldReturnNilWhenPeekingFirstEmptyList(t *testing.T){
-	list := LinkedList{}
+	list := New()
 	first := list.PeekFirst()
 
 	if 	first != nil {
@@ -34,8 +34,7 @@ func TestShouldReturnNilWhenPeekingFirstEmptyList(t *testing.T){
 }
 
 func TestShouldPeekFirstElementOfList(t *testing.T) {
-	list := LinkedList{}
-	list.AddFirst(33)
+	list := New()
 	list.AddFirst(22)
 
 	first := list.PeekFirst()
@@ -50,7 +49,7 @@ func TestShouldPeekFirstElementOfList(t *testing.T) {
 }
 
 func TestShouldReturnNilWhenPollingFirstEmptyList(t *testing.T){
-	list := LinkedList{}
+	list := New()
 
 	first := list.PollFirst()
 	if 	first != nil {
@@ -59,7 +58,7 @@ func TestShouldReturnNilWhenPollingFirstEmptyList(t *testing.T){
 }
 
 func TestShouldPollFirstExpectedElementsOfList(t *testing.T) {
-	list := LinkedList{}
+	list := New()
 	list.AddFirst(33)
 	list.AddFirst(22)
 
