@@ -1,8 +1,7 @@
 package list
 
-import (
-	"testing"
-)
+import "testing"
+
 
 func TestShouldReturnZeroWhenGettingSizeOfEmptyList(t *testing.T){
 	list := New()
