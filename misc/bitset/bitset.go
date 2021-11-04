@@ -5,7 +5,7 @@ type BitSet struct {
 	size int
 }
 
-func New(size int) *BitSet{
+func New(size int) *BitSet {
 	return &BitSet{size: size, list: make([]bool, size)}
 }
 
@@ -45,12 +45,10 @@ func (bs *BitSet) FlipRange(from int, to int) {
 
 func (bs *BitSet) Cardinality() int {
 	setBits := 0
-	for i := 0; i < bs.size; i++ {
-		if bs.list[i] {
+	for _, bit := range bs.list {
+		if bit {
 			setBits++
 		}
 	}
 	return setBits
 }
-
-
