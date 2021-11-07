@@ -6,51 +6,83 @@ import (
 
 type PriorityQueue struct {
 	heap       []interface{}
-	comparator util.Comparator
-	size       int
+	comparator  util.Comparator
+	currentSize int
 }
 
 func New(comparator util.Comparator) *PriorityQueue {
 	return &PriorityQueue{
-		heap:       make([]interface{}, 2),
-		size:       0,
-		comparator: comparator}
+		heap:        make([]interface{},1),
+		currentSize: 0,
+		comparator:  comparator}
 }
 
-func (pq *PriorityQueue) Peek() interface{} {
-	if pq.size == 0 {
+func (pq *PriorityQueue) PeekMin() interface{} {
+	if pq.currentSize == 0 {
 		return nil
 	}
-	return pq.heap[0]
+	return pq.heap[1]
 }
 
-func (pq *PriorityQueue) Poll() interface{} {
-	if pq.size == 0 {
+func (pq *PriorityQueue) PollMin() interface{} {
+	if pq.currentSize == 0 {
 		return nil
 	}
 	response := pq.heap[1]
-
+	pq.deleteMin()
 	return response
 }
 
-func (pq *PriorityQueue) Insert(node interface{}) {
+func (pq *PriorityQueue) IsEmpty() bool {
+	return pq.currentSize == 0
 }
 
-func (pq *PriorityQueue) heapify(index int) {
-	leftChild := index * 2
-	rightChild := index*2 + 1
-	smallest := index
+func (pq *PriorityQueue) Insert(node interface{}) {
+	if pq.currentSize == len(pq.heap)-1 {
+		pq.heap = append(pq.heap, nil)
+	}
+	pq.currentSize++
+	pq.heap[pq.currentSize] = node
+	slot := pq.currentSize
 
-	if leftChild <= pq.size && pq.comparator(pq.heap[leftChild], pq.heap[index]) < 0 {
+	for slot > 1 {
+		parent := slot/2
+		if pq.comparator(pq.heap[parent], pq.heap[slot]) <= 0 {
+			break
+		}
+		pq.heap[slot], pq.heap[parent] = pq.heap[parent], pq.heap[slot]
+		slot = parent
+	}
+}
+
+
+func (pq *PriorityQueue) deleteMin() {
+	pq.heap[1] = pq.heap[pq.currentSize]
+	pq.heap[pq.currentSize] = nil
+	pq.currentSize--
+	slot := 1
+
+	for slot < pq.currentSize {
+		minChild := pq.getMinChild(slot)
+		if minChild != slot {
+			pq.heap[slot], pq.heap[minChild] = pq.heap[minChild], pq.heap[slot]
+			slot = minChild
+		} else {
+			break
+		}
+	}
+}
+
+func (pq *PriorityQueue) getMinChild(slot int) int {
+	leftChild := slot * 2
+	rightChild := leftChild + 1
+	smallest := slot
+
+	if leftChild <= pq.currentSize && pq.comparator(pq.heap[leftChild], pq.heap[smallest]) < 0 {
 		smallest = leftChild
 	}
-	if rightChild <= pq.size && pq.comparator(pq.heap[rightChild], pq.heap[smallest]) < 0 {
+	if rightChild <= pq.currentSize && pq.comparator(pq.heap[rightChild], pq.heap[smallest]) < 0 {
 		smallest = rightChild
 	}
-	if smallest != pq.heap[index] {
-	}
-}
-
-func (pq *PriorityQueue) swap() {
-
+	return smallest
 }
