@@ -2,11 +2,20 @@ package bitset
 
 type BitSet struct {
 	list []bool
-	size int
+
 }
 
 func New(size int) *BitSet {
-	return &BitSet{size: size, list: make([]bool, size)}
+	return &BitSet{list: make([]bool, size)}
+}
+
+func (bs *BitSet) Size() int {
+	return len(bs.list)
+}
+
+
+func(bs *BitSet) Add(isSet bool) {
+	bs.list = append(bs.list, isSet)
 }
 
 func (bs *BitSet) Get(index int) bool {

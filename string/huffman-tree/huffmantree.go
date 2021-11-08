@@ -2,7 +2,8 @@ package huffman_tree
 
 import (
 	"bytes"
-	priorityqueue "go-datastructures/queue/priority-queue"
+	"go-datastructures/queue/priorityqueue"
+	"go-datastructures/set/bitset"
 )
 
 type HuffmanTree struct {
@@ -42,6 +43,39 @@ func New(word string) *HuffmanTree {
 	huffmanTree.buildTree()
 	huffmanTree.encodeWord(huffmanTree.root, &bytes.Buffer{})
 	return huffmanTree
+}
+
+func (ht *HuffmanTree) GetEncoding() *bitset.BitSet {
+	bitSet := bitset.New(0)
+	for _, char := range ht.word {
+		bitSeq := ht.encodeMap[byte(char)]
+		for _, bit := range bitSeq {
+			if bit == '1' {
+				bitSet.Add(true)
+			} else {
+				bitSet.Add(false)
+			}
+		}
+	}
+	return bitSet
+}
+
+func (ht *HuffmanTree) GetDecoding(bitset bitset.BitSet) string {
+	wordBuffer := bytes.Buffer{}
+	node := ht.root
+
+	for i := 0; i < bitset.Size(); i++ {
+		if bitset.Get(i) {
+			node = node.right
+		} else {
+			node = node.left
+		}
+		if node.char != 0 {
+			wordBuffer.WriteByte(node.char)
+			node = ht.root
+		}
+	}
+	return wordBuffer.String()
 }
 
 func (ht *HuffmanTree) buildTree() {
