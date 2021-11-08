@@ -37,6 +37,10 @@ func (pq *PriorityQueue) IsEmpty() bool {
 	return pq.currentSize == 0
 }
 
+func (pq *PriorityQueue) Size() int {
+	return pq.currentSize
+}
+
 func (pq *PriorityQueue) Insert(node interface{}) {
 	if pq.currentSize == len(pq.heap)-1 {
 		pq.heap = append(pq.heap, nil)
