@@ -1,61 +1,83 @@
 package bitset
 
-type BitSet struct {
-	list []bool
+import (
+	"math/big"
+)
 
+type BitSet struct {
+	bits big.Int
+	length int
 }
 
-func New(size int) *BitSet {
-	return &BitSet{list: make([]bool, size)}
+func New() *BitSet {
+	return &BitSet{}
 }
 
 func (bs *BitSet) Size() int {
-	return len(bs.list)
+	return bs.length
 }
 
-
-func(bs *BitSet) Add(isSet bool) {
-	bs.list = append(bs.list, isSet)
+func (bs *BitSet) Add(bit uint) {
+	bs.bits.SetBit(&bs.bits, bs.length, bit)
+	bs.length++
 }
 
-func (bs *BitSet) Get(index int) bool {
-	return bs.list[index]
+func (bs *BitSet) Get(index int) uint {
+	return bs.bits.Bit(index)
 }
 
 func (bs *BitSet) Set(index int) {
-	bs.list[index] = true
+	bs.bits.SetBit(&bs.bits, index, 1)
+	if index >= bs.length {
+		bs.length = index+1
+	}
 }
 
 func (bs *BitSet) SetRange(from int, to int) {
 	for i := from; i < to; i++ {
-		bs.list[i] = true
+		bs.bits.SetBit(&bs.bits, i, 1)
+	}
+	if to-1 >= bs.length {
+		bs.length = to
 	}
 }
 
 func (bs *BitSet) Clear(index int) {
-	bs.list[index] = false
+	bs.bits.SetBit(&bs.bits, index, 0)
 }
 
 func (bs *BitSet) ClearRange(from int, to int) {
 	for i := from; i < to; i++ {
-		bs.list[i] = false
+		bs.bits.SetBit(&bs.bits, i, 0)
 	}
-}
-
-func (bs *BitSet) Flip(index int) {
-	bs.list[index] = !bs.list[index]
 }
 
 func (bs *BitSet) FlipRange(from int, to int) {
 	for i := from; i < to; i++ {
-		bs.list[i] = !bs.list[i]
+		bs.Flip(i)
+	}
+	if to-1 >= bs.length {
+		bs.length = to
+	}
+}
+
+func (bs *BitSet) Flip(index int) {
+	var bit = bs.bits.Bit(index)
+	if bit == 0 {
+		bit = 1
+	} else {
+		bit = 0
+	}
+	bs.bits.SetBit(&bs.bits, index, bit)
+	if index >= bs.length {
+		bs.length = index+1
 	}
 }
 
 func (bs *BitSet) Cardinality() int {
 	setBits := 0
-	for _, bit := range bs.list {
-		if bit {
+	for i := 0; i< bs.length; i++ {
+		if bs.bits.Bit(i) == 1 {
 			setBits++
 		}
 	}

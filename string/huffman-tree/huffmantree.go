@@ -46,14 +46,14 @@ func New(word string) *HuffmanTree {
 }
 
 func (ht *HuffmanTree) GetEncoding() *bitset.BitSet {
-	bitSet := bitset.New(0)
+	bitSet := bitset.New()
 	for _, char := range ht.word {
 		bitSeq := ht.encodeMap[byte(char)]
 		for _, bit := range bitSeq {
 			if bit == '1' {
-				bitSet.Add(true)
+				bitSet.Add(1)
 			} else {
-				bitSet.Add(false)
+				bitSet.Add(0)
 			}
 		}
 	}
@@ -65,7 +65,7 @@ func (ht *HuffmanTree) GetDecoding(bitset bitset.BitSet) string {
 	node := ht.root
 
 	for i := 0; i < bitset.Size(); i++ {
-		if bitset.Get(i) {
+		if bitset.Get(i) == 1{
 			node = node.right
 		} else {
 			node = node.left

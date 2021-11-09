@@ -3,40 +3,40 @@ package bitset
 import "testing"
 
 func TestShouldSetExpectedBit(t *testing.T)  {
-	bitSet := New(20)
+	bitSet := New()
 	bitSet.Set(4)
 
-	if !bitSet.Get(4) {
+	if bitSet.Get(4) == 0 {
 		t.Error("Bit at index 4 should be set")
 	}
 }
 
 func TestShouldClearExpectedBit(t *testing.T) {
-	bitSet := New(20)
+	bitSet := New()
 	bitSet.Set(4)
 	bitSet.Clear(4)
 
-	if bitSet.Get(4) {
+	if bitSet.Get(4) == 1 {
 		t.Error("Bit at index 4 should be cleared")
 	}
 }
 
 func TestShouldFlipExpectedBit(t *testing.T)  {
-	bitSet := New(20)
+	bitSet := New()
 
 	bitSet.Flip(4)
-	if !bitSet.Get(4) {
+	if bitSet.Get(4) == 0{
 		t.Error("Bit at index 4 should be set")
 	}
 
 	bitSet.Flip(4)
-	if bitSet.Get(4) {
+	if bitSet.Get(4) == 1 {
 		t.Error("Bit at index 4 should be cleared")
 	}
 }
 
 func TestShouldSetRangeOfBits(t *testing.T)  {
-	bitSet := New(20)
+	bitSet := New()
 	bitSet.SetRange(3, 10)
 
 	setCount := bitSet.Cardinality()
@@ -46,7 +46,7 @@ func TestShouldSetRangeOfBits(t *testing.T)  {
 }
 
 func TestShouldClearRangeOfBits(t *testing.T)  {
-	bitSet := New(20)
+	bitSet := New()
 	bitSet.SetRange(0, 20)
 	bitSet.ClearRange(5, 10)
 
@@ -57,7 +57,7 @@ func TestShouldClearRangeOfBits(t *testing.T)  {
 }
 
 func TestShouldFlipRangeOfBits(t *testing.T)  {
-	bitSet := New(20)
+	bitSet := New()
 
 	bitSet.FlipRange(5, 10)
 	setCount := bitSet.Cardinality()
