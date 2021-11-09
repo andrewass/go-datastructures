@@ -1,4 +1,4 @@
-package range_query
+package fenwicktree
 
 import "testing"
 

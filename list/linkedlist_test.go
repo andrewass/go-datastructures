@@ -42,7 +42,7 @@ func TestShouldPeekFirstElementOfList(t *testing.T) {
 	}
 
 	listSize := list.Size()
-	if listSize != 2{
+	if listSize != 1{
 		t.Error("List size should be 1, got", listSize)
 	}
 }
