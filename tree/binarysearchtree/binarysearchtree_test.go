@@ -1,0 +1,45 @@
+package binarysearchtree
+
+import "testing"
+
+type item struct {
+	id uint
+	value float32
+}
+
+func itemComparator (a interface{}, b interface{}) int {
+	taskA := a.(*item)
+	taskB := b.(*item)
+	if taskA.value < taskB.value {
+		return -1
+	} else if taskA.value > taskB.value {
+		return 1
+	} else {
+		return 0
+	}
+}
+
+
+func TestShouldConstructBinarySearchTreeAsExpected(t *testing.T){
+	bst := New(itemComparator)
+	items := []*item{ {id:1, value: 399.94}, {id:2, value: 85.94},{id:3, value: 5.94},{id:4, value: 235.94},
+		{id:5, value: 6.94},{id:6, value: 35245.94},{id:7, value: 31235.94},{id:8, value: 8.94},{id:9, value: 145.94},
+		{id:10, value: 35.97},{id:11, value: 12335.94},{id:12, value: 43535.94}, {id:13, value: 324535.94}, {id:14,
+			value: 324345.92}}
+
+	for _,item := range items{
+		bst.Insert(item.id, item)
+	}
+
+	if bst.Size() != len(items) {
+		t.Errorf("Expected tree of size %v, got %v", len(items), bst.Size())
+	}
+
+	if minItem := bst.Minimum(); minItem != items[2] {
+		t.Errorf("Expected minItem with value %v, got %v", items[2].value, minItem.(*item).value)
+	}
+
+	if maxItem := bst.Maximum(); maxItem != items[12] {
+		t.Errorf("Expected maxItem with value %v, got %v", items[12].value, maxItem.(*item).value)
+	}
+}
