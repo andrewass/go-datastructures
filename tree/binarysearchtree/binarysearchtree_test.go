@@ -8,11 +8,11 @@ type item struct {
 }
 
 func itemComparator (a interface{}, b interface{}) int {
-	taskA := a.(*item)
-	taskB := b.(*item)
-	if taskA.value < taskB.value {
+	taskA := a.(float32)
+	taskB := b.(float32)
+	if taskA < taskB {
 		return -1
-	} else if taskA.value > taskB.value {
+	} else if taskA > taskB {
 		return 1
 	} else {
 		return 0
@@ -28,7 +28,7 @@ func TestShouldConstructBinarySearchTreeAsExpected(t *testing.T){
 			value: 324345.92}}
 
 	for _,item := range items{
-		bst.Insert(item.id, item)
+		bst.Insert(item.value, item)
 	}
 
 	if bst.Size() != len(items) {
@@ -42,4 +42,10 @@ func TestShouldConstructBinarySearchTreeAsExpected(t *testing.T){
 	if maxItem := bst.Maximum(); maxItem != items[12] {
 		t.Errorf("Expected maxItem with value %v, got %v", items[12].value, maxItem.(*item).value)
 	}
+
+	if foundItem := bst.Find(items[7].value) ; foundItem != items[7] {
+		t.Errorf("Expected item with id %v, got %v", items[7].id, foundItem.(*item).id)
+	}
+
+	bst.Delete(items[7].value)
 }
