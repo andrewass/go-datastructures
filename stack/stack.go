@@ -1,12 +1,12 @@
 package stack
 
-import "go-datastructures/list"
+import "go-datastructures/linkedlist"
 
 type Stack struct {
-	list *list.LinkedList
+	list *linkedlist.LinkedList
 }
 func New() *Stack {
-	return &Stack{list : &list.LinkedList{}}
+	return &Stack{list : &linkedlist.LinkedList{}}
 }
 
 func (s *Stack) Push(item interface{}) {

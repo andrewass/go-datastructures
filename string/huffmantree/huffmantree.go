@@ -1,4 +1,4 @@
-package huffman_tree
+package huffmantree
 
 import (
 	"bytes"

@@ -1,4 +1,4 @@
-package list
+package linkedlist
 
 type LinkedList struct {
 	head *node
@@ -37,15 +37,25 @@ func (ll *LinkedList) PollFirst() interface{} {
 func (ll *LinkedList) AddFirst(value interface{}) {
 	newNode := &node{value: value}
 	newNode.next = ll.head
-	ll.head = newNode
 	if ll.size == 0 {
 		ll.tail = newNode
+	} else {
+		ll.head.prev = newNode
 	}
+	ll.head = newNode
 	ll.size++
 }
 
 func (ll *LinkedList) AddLast(value interface{}) {
-
+	newNode := &node{value: value}
+	newNode.prev = ll.tail
+	if ll.size == 0 {
+		ll.head = newNode
+	} else {
+		ll.tail.next = newNode
+	}
+	ll.tail = newNode
+	ll.size++
 }
 
 func (ll *LinkedList) Size() int {

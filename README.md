@@ -5,7 +5,7 @@ Data Structures written in Go
 - [Priority Queue](https://github.com/andrewass/go-datastructures/blob/main/queue/priorityqueue/priorityqueue.go)
 
 ### List
-- [Linked List](https://github.com/andrewass/go-datastructures/blob/main/list/linkedlist.go)
+- [Linked List](https://github.com/andrewass/go-datastructures/blob/main/linkedlist/linkedlist.go)
 
 ### Set
 - [Bit Set](https://github.com/andrewass/go-datastructures/blob/main/set/bitset/bitset.go)
@@ -14,8 +14,11 @@ Data Structures written in Go
 ### Stack
 - [Stack](https://github.com/andrewass/go-datastructures/blob/main/stack/stack.go)
 
+### Tree
+- [Binary Search Tree](https://github.com/andrewass/go-datastructures/blob/main/tree/binarysearchtree/binarysearchtree.go)
+
 ### String
-- [Huffman Tree](https://github.com/andrewass/go-datastructures/blob/main/string/huffman-tree/huffmantree.go)
+- [Huffman Tree](https://github.com/andrewass/go-datastructures/blob/main/string/huffmantree/huffmantree.go)
 
 ### Range Query
 - [Fenwick Tree](https://github.com/andrewass/go-datastructures/blob/main/rangequery/fenwicktree/fenwicktree.go)

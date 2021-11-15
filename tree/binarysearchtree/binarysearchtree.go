@@ -1,6 +1,7 @@
 package binarysearchtree
 
 import (
+	"go-datastructures/linkedlist"
 	"go-datastructures/util"
 )
 
@@ -64,8 +65,16 @@ func (bst *BinarySearchTree) Delete(key interface{}) {
 	}
 }
 
-func (bst *BinarySearchTree) deleteNodeWithTwoChildren(deleteNode *node){
-
+func (bst *BinarySearchTree) deleteNodeWithTwoChildren(deleteNode *node) {
+	minRightNode := bst.findMinimum(deleteNode.rightChild)
+	if minRightNode.parent != deleteNode {
+		bst.transplant(minRightNode, minRightNode.rightChild)
+		minRightNode.rightChild = deleteNode.rightChild
+		minRightNode.rightChild.parent = minRightNode
+	}
+	bst.transplant(deleteNode, minRightNode)
+	minRightNode.leftChild = deleteNode.leftChild
+	minRightNode.leftChild.parent = minRightNode
 }
 
 // Removes the linking between a parent and child, and creates a direct
@@ -82,7 +91,7 @@ func (bst *BinarySearchTree) transplant(parent *node, child *node) {
 	if child != nil {
 		child.parent = parent.parent
 	}
- }
+}
 
 // Find : search the tree for any node containing the given key.
 // If exists return its item, else return nil
@@ -109,30 +118,57 @@ func (bst *BinarySearchTree) findNode(key interface{}) *node {
 	return nil
 }
 
-// Minimum : find the item with the lowest comparable value in the tree
-func (bst *BinarySearchTree) Minimum() interface{} {
-	currentNode := bst.root
+func (bst *BinarySearchTree) findMinimum(node *node) *node {
+	currentNode := node
 	for currentNode != nil && currentNode.leftChild != nil {
 		currentNode = currentNode.leftChild
 	}
-	return currentNode.item
+	return currentNode
+}
+
+func (bst *BinarySearchTree) findMaximum(node *node) *node {
+	currentNode := node
+	for currentNode != nil && currentNode.rightChild != nil {
+		currentNode = currentNode.rightChild
+	}
+	return currentNode
+}
+
+// Minimum : find the item with the lowest comparable value in the tree
+func (bst *BinarySearchTree) Minimum() interface{} {
+	minimumNode := bst.findMinimum(bst.root)
+	if minimumNode != nil {
+		return minimumNode.item
+	}
+	return nil
 }
 
 // Maximum : find the item with the greatest comparable value in the tree
 func (bst *BinarySearchTree) Maximum() interface{} {
-	currentNode := bst.root
-	for currentNode != nil && currentNode.rightChild != nil {
-		currentNode = currentNode.rightChild
+	maximumNode := bst.findMaximum(bst.root)
+	if maximumNode != nil {
+		return maximumNode.item
 	}
-	return currentNode.item
-}
-
-//InOrderList : returns a sorted list of all items in the tree
-func (bst *BinarySearchTree) InOrderList() []interface{} {
 	return nil
 }
 
-//Size : returns the number of items in the tree
+// InOrderList : returns a sorted list of all items in the tree
+func (bst *BinarySearchTree) InOrderList() *linkedlist.LinkedList {
+	inOrderList := linkedlist.New()
+	bst.fillInOrderList(bst.root, inOrderList)
+
+	return inOrderList
+}
+
+func (bst *BinarySearchTree) fillInOrderList(node *node, list *linkedlist.LinkedList) {
+	if node != nil {
+		bst.fillInOrderList(node.leftChild, list)
+		list.AddLast(node.item)
+		bst.fillInOrderList(node.rightChild, list)
+	}
+}
+
+// Size : returns the number of items in the tree
 func (bst *BinarySearchTree) Size() int {
 	return bst.size
 }
