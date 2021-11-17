@@ -1,16 +1,16 @@
 package priorityqueue
 
 import (
-	"go-datastructures/util"
+	"go-datastructures/util/comparator"
 )
 
 type PriorityQueue struct {
-	heap       []interface{}
-	comparator  util.Comparator
+	heap        []interface{}
+	comparator  comparator.Comparator
 	currentSize int
 }
 
-func New(comparator util.Comparator) *PriorityQueue {
+func New(comparator comparator.Comparator) *PriorityQueue {
 	return &PriorityQueue{
 		heap:        make([]interface{},1),
 		currentSize: 0,

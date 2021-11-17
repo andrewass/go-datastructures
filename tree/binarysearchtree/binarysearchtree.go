@@ -1,8 +1,8 @@
 package binarysearchtree
 
 import (
-	"go-datastructures/linkedlist"
-	"go-datastructures/util"
+	"go-datastructures/list/linkedlist"
+	"go-datastructures/util/comparator"
 )
 
 type node struct {
@@ -15,12 +15,12 @@ type node struct {
 
 type BinarySearchTree struct {
 	root       *node
-	comparator util.Comparator
+	comparator comparator.Comparator
 	size       int
 }
 
 // New : create a new BinarySearchTree, by specifying its comparator
-func New(comparator util.Comparator) *BinarySearchTree {
+func New(comparator comparator.Comparator) *BinarySearchTree {
 	return &BinarySearchTree{comparator: comparator}
 }
 
