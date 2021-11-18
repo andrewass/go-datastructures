@@ -2,6 +2,8 @@ package trie
 
 import (
 	"github.com/stretchr/testify/assert"
+	"go-datastructures/util/comparator"
+	"sort"
 	"testing"
 )
 
@@ -57,13 +59,11 @@ func TestShouldReturnListOfWordsWithCommonPrefix(t *testing.T) {
 	assert.Equal(t, len(commonPrefixList), matches.Size())
 
 	//Todo Fix return type. Use list or slice
-	/*
 	sort.Strings(commonPrefixList)
-	sort.Strings(matches)
+	matches.Sort(comparator.StringComparator)
 	for i := 0; i < matches.Size(); i++ {
 		assert.Equal(t, matches.Get(i), commonPrefixList[i])
 	}
-	 */
 }
 
 func TestShouldDeleteSubsetOfPreviouslyStoredWords(t *testing.T) {
@@ -80,10 +80,10 @@ func TestShouldDeleteSubsetOfPreviouslyStoredWords(t *testing.T) {
 	trie.DeleteWord("pro")
 	trie.DeleteWord("programming")
 
-	assert.False(t,trie.WordExists("programming"))
-	assert.False(t,trie.WordExists("provision"))
-	assert.False(t,trie.WordExists("pro"))
-	assert.False(t,trie.WordExists("program"))
-	assert.True(t,trie.WordExists("programmer"))
-	assert.True(t,trie.WordExists("programmable"))
+	assert.False(t, trie.WordExists("programming"))
+	assert.False(t, trie.WordExists("provision"))
+	assert.False(t, trie.WordExists("pro"))
+	assert.False(t, trie.WordExists("program"))
+	assert.True(t, trie.WordExists("programmer"))
+	assert.True(t, trie.WordExists("programmable"))
 }

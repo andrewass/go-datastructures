@@ -27,8 +27,12 @@ func (al *ArrayList) Remove(index int) {
 	al.items = append(firstPart, lastPart...)
 }
 
-func (al * ArrayList) Swap(indexA int, indexB int)  {
+func (al *ArrayList) Replace(index int, item interface{}) {
+	al.items[index] = item
+}
 
+func (al *ArrayList) Swap(indexA, indexB int) {
+	al.items[indexB], al.items[indexA] = al.items[indexA], al.items[indexB]
 }
 
 func (al *ArrayList) Size() int {

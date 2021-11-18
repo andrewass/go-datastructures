@@ -1,7 +1,7 @@
 package trie
 
 import (
-	"go-datastructures/list/linkedlist"
+	"go-datastructures/list/arraylist"
 	"strings"
 )
 
@@ -52,9 +52,9 @@ func (t Trie) WordExists(word string) bool {
 }
 
 // WordExistsByPrefix : Find all words with a common specified prefix
-func (t Trie) WordExistsByPrefix(word string) *linkedlist.LinkedList {
+func (t Trie) WordExistsByPrefix(word string) *arraylist.ArrayList {
 	prefix := strings.ToLower(word)
-	matches := linkedlist.New()
+	matches := arraylist.New()
 	currentNode := t.rootNode
 
 	for _,letter := range prefix {
@@ -64,7 +64,7 @@ func (t Trie) WordExistsByPrefix(word string) *linkedlist.LinkedList {
 		}
 	}
 	if currentNode.isEndOfWord{
-		matches.AddLast(word)
+		matches.Add(word)
 	}
 	for _,value := range currentNode.children {
 		t.constructCommonPrefixWords(value, strings.Builder{},matches)
@@ -73,10 +73,10 @@ func (t Trie) WordExistsByPrefix(word string) *linkedlist.LinkedList {
 	return matches
 }
 
-func (t Trie) constructCommonPrefixWords(node *trieNode, word strings.Builder, matches *linkedlist.LinkedList, ){
+func (t Trie) constructCommonPrefixWords(node *trieNode, word strings.Builder, matches *arraylist.ArrayList, ){
 	word.WriteByte(node.letter)
 	if node.isEndOfWord {
-		matches.AddLast(word.String())
+		matches.Add(word.String())
 	}
 	for _,value := range node.children {
 		t.constructCommonPrefixWords(value, word, matches)
