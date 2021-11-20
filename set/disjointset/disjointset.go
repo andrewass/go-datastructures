@@ -2,8 +2,8 @@ package disjointset
 
 type setNode struct {
 	item   interface{}
-	rank   uint
-	size   uint
+	rank   int
+	size   int
 	parent *setNode
 }
 
@@ -54,7 +54,7 @@ func (djs *DisjointSet) IsSameSet(keyA interface{}, keyB interface{}) bool {
 	return djs.findRootNode(djs.mapNodes[keyA]) == djs.findRootNode(djs.mapNodes[keyB])
 }
 
-func (djs *DisjointSet) GetSetSize(key interface{}) uint {
+func (djs *DisjointSet) GetSetSize(key interface{}) int {
 	rootNode := djs.findRootNode(djs.mapNodes[key])
 
 	return rootNode.size

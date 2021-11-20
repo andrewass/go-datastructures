@@ -34,8 +34,9 @@ func (t Trie) AddWord(word string) {
 	currentNode.isEndOfWord = true
 }
 
+// DeleteWord : Delete a word from the Trie
 func (t Trie) DeleteWord(word string) {
-
+	t.delete(t.rootNode, 0, word)
 }
 
 // WordExists : Traverse the trie to search for a given word
@@ -57,28 +58,54 @@ func (t Trie) WordExistsByPrefix(word string) *arraylist.ArrayList {
 	matches := arraylist.New()
 	currentNode := t.rootNode
 
-	for _,letter := range prefix {
-		currentNode := currentNode.children[byte(letter)]
-		if currentNode != nil {
+	for _, letter := range prefix {
+		currentNode = currentNode.children[byte(letter)]
+		if currentNode == nil {
 			return matches
 		}
 	}
-	if currentNode.isEndOfWord{
+	if currentNode.isEndOfWord {
 		matches.Add(word)
 	}
-	for _,value := range currentNode.children {
-		t.constructCommonPrefixWords(value, strings.Builder{},matches)
+	for _, value := range currentNode.children {
+		builder := &strings.Builder{}
+		builder.WriteString(word)
+		t.constructCommonPrefixWords(value, builder, matches)
 	}
-
 	return matches
 }
 
-func (t Trie) constructCommonPrefixWords(node *trieNode, word strings.Builder, matches *arraylist.ArrayList, ){
+// Construct all words sharing a common prefix
+func (t Trie) constructCommonPrefixWords(node *trieNode, word *strings.Builder, matches *arraylist.ArrayList) {
 	word.WriteByte(node.letter)
 	if node.isEndOfWord {
 		matches.Add(word.String())
 	}
-	for _,value := range node.children {
+	for _, value := range node.children {
 		t.constructCommonPrefixWords(value, word, matches)
+	}
+}
+
+func (t Trie) delete(node *trieNode, index int, word string) bool {
+	if index == len(word) {
+		if !node.isEndOfWord {
+			return false
+
+		} else {
+			node.isEndOfWord = false
+			return len(node.children) == 0
+		}
+	}
+	childNode := node.children[word[index]]
+	if childNode == nil {
+		return false
+	}
+
+	deletableChild := t.delete(childNode, index+1, word) && !childNode.isEndOfWord
+	if deletableChild {
+		delete(node.children, word[index])
+		return len(node.children) == 0
+	} else {
+		return false
 	}
 }

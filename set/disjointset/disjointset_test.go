@@ -1,6 +1,9 @@
 package disjointset
 
-import "testing"
+import (
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
 type testStruct struct {
 	id   int
@@ -16,31 +19,15 @@ func TestShouldCreateDisjointSet(t *testing.T) {
 		disjointSet.AddItem(item.id, item)
 	}
 
-	if fetchedItem := disjointSet.GetItem(items[2].id); fetchedItem != items[2] {
-		t.Error("Should get item 3, got", fetchedItem.(testStruct))
-	}
-
-	if !disjointSet.IsSameSet(items[0].id, items[0].id) {
-		t.Error("Item should be in same set as itself")
-	}
+	assert.Equal(t,items[2], disjointSet.GetItem(items[2].id))
+	assert.True(t, disjointSet.IsSameSet(items[0].id, items[0].id))
 
 	disjointSet.Union(items[1].id, items[3].id)
 	disjointSet.Union(items[3].id, items[4].id)
 	disjointSet.Union(items[1].id, items[5].id)
 
-	if !disjointSet.IsSameSet(items[3].id, items[5].id) {
-		t.Error("Item 4 and 6 should be in same set")
-	}
-
-	if disjointSet.IsSameSet(items[2].id, items[4].id) {
-		t.Error("Item 3 and 5 should not be in same set")
-	}
-
-	if setSize := disjointSet.GetSetSize(items[3].id); setSize != 4 {
-		t.Error("Set size should be 4, got", setSize)
-	}
-
-	if setSize := disjointSet.GetSetSize(items[2].id); setSize != 1 {
-		t.Error("Set size should be 1, got", setSize)
-	}
+	assert.True(t, disjointSet.IsSameSet(items[3].id, items[5].id))
+	assert.False(t, disjointSet.IsSameSet(items[2].id, items[4].id))
+	assert.Equal(t, 4, disjointSet.GetSetSize(items[3].id) )
+	assert.Equal(t, 1, disjointSet.GetSetSize(items[2].id) )
 }

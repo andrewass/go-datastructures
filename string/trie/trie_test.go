@@ -58,9 +58,15 @@ func TestShouldReturnListOfWordsWithCommonPrefix(t *testing.T) {
 	matches := trie.WordExistsByPrefix("pro")
 	assert.Equal(t, len(commonPrefixList), matches.Size())
 
-	//Todo Fix return type. Use list or slice
 	sort.Strings(commonPrefixList)
 	matches.Sort(comparator.StringComparator)
+	for i := 0; i < matches.Size(); i++ {
+		assert.Equal(t, matches.Get(i), commonPrefixList[i])
+	}
+
+	trie.DeleteWord("provision")
+	matches = trie.WordExistsByPrefix("pro")
+	assert.Equal(t, len(commonPrefixList)-1, matches.Size())
 	for i := 0; i < matches.Size(); i++ {
 		assert.Equal(t, matches.Get(i), commonPrefixList[i])
 	}
