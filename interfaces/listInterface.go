@@ -1,6 +1,6 @@
 package interfaces
 
-import "go-datastructures/util/comparator"
+import "go-datastructures-algorithms/util/comparator"
 
 type ListInterface interface {
 	Get(index int) interface{}

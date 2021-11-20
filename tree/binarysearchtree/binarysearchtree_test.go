@@ -1,7 +1,7 @@
 package binarysearchtree
 
 import (
-	"go-datastructures/list/linkedlist"
+	"go-datastructures-algorithms/list/linkedlist"
 	"testing"
 )
 

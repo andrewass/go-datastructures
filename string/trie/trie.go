@@ -1,7 +1,7 @@
 package trie
 
 import (
-	"go-datastructures/list/arraylist"
+	"go-datastructures-algorithms/list/arraylist"
 	"strings"
 )
 

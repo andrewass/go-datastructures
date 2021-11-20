@@ -1,7 +1,7 @@
 package priorityqueue
 
 import (
-	"go-datastructures/util/comparator"
+	"go-datastructures-algorithms/util/comparator"
 )
 
 type PriorityQueue struct {

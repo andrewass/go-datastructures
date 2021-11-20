@@ -2,7 +2,7 @@ package arraylist
 
 import (
 	"github.com/stretchr/testify/assert"
-	"go-datastructures/util/comparator"
+	"go-datastructures-algorithms/util/comparator"
 	"testing"
 )
 

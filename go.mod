@@ -1,4 +1,4 @@
-module go-datastructures
+module go-datastructures-algorithms
 
 go 1.17
 

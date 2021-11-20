@@ -1,8 +1,8 @@
 package binarysearchtree
 
 import (
-	"go-datastructures/list/linkedlist"
-	"go-datastructures/util/comparator"
+	"go-datastructures-algorithms/list/linkedlist"
+	"go-datastructures-algorithms/util/comparator"
 )
 
 type node struct {

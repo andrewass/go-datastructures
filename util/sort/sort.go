@@ -1,8 +1,8 @@
 package sort
 
 import (
-	"go-datastructures/interfaces"
-	"go-datastructures/util/comparator"
+	"go-datastructures-algorithms/interfaces"
+	"go-datastructures-algorithms/util/comparator"
 )
 
 func ListSort(comparator comparator.Comparator, items interfaces.ListInterface) {

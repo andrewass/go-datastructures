@@ -2,8 +2,8 @@ package huffmantree
 
 import (
 	"bytes"
-	"go-datastructures/queue/priorityqueue"
-	"go-datastructures/set/bitset"
+	"go-datastructures-algorithms/queue/priorityqueue"
+	"go-datastructures-algorithms/set/bitset"
 )
 
 type HuffmanTree struct {

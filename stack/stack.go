@@ -1,7 +1,7 @@
 package stack
 
 import (
-	"go-datastructures/list/linkedlist"
+	"go-datastructures-algorithms/list/linkedlist"
 )
 
 type Stack struct {

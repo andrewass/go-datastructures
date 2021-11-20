@@ -1,8 +1,8 @@
 package arraylist
 
 import (
-	"go-datastructures/util/comparator"
-	"go-datastructures/util/sort"
+	"go-datastructures-algorithms/util/comparator"
+	"go-datastructures-algorithms/util/sort"
 )
 
 type ArrayList struct {
