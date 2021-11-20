@@ -1,73 +1,56 @@
 package bitset
 
-import "testing"
+import (
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
-func TestShouldSetExpectedBit(t *testing.T)  {
+func TestShouldSetExpectedBit(t *testing.T) {
 	bitSet := New()
-	bitSet.Set(4)
 
-	if bitSet.Get(4) == 0 {
-		t.Error("Bit at index 4 should be set")
-	}
+	bitSet.Set(4)
+	assert.Equal(t, 1, bitSet.Get(4))
 }
 
 func TestShouldClearExpectedBit(t *testing.T) {
 	bitSet := New()
+
 	bitSet.Set(4)
 	bitSet.Clear(4)
-
-	if bitSet.Get(4) == 1 {
-		t.Error("Bit at index 4 should be cleared")
-	}
+	assert.Equal(t, 0, bitSet.Get(4))
 }
 
-func TestShouldFlipExpectedBit(t *testing.T)  {
+func TestShouldFlipExpectedBit(t *testing.T) {
 	bitSet := New()
 
 	bitSet.Flip(4)
-	if bitSet.Get(4) == 0{
-		t.Error("Bit at index 4 should be set")
-	}
+	assert.Equal(t, 1, bitSet.Get(4))
 
 	bitSet.Flip(4)
-	if bitSet.Get(4) == 1 {
-		t.Error("Bit at index 4 should be cleared")
-	}
+	assert.Equal(t, 0, bitSet.Get(4))
 }
 
-func TestShouldSetRangeOfBits(t *testing.T)  {
+func TestShouldSetRangeOfBits(t *testing.T) {
 	bitSet := New()
+
 	bitSet.SetRange(3, 10)
-
-	setCount := bitSet.Cardinality()
-	if setCount != 7 {
-		t.Error("Number of set bits should be 7, got ",setCount)
-	}
+	assert.Equal(t, 7, bitSet.Cardinality())
 }
 
-func TestShouldClearRangeOfBits(t *testing.T)  {
+func TestShouldClearRangeOfBits(t *testing.T) {
 	bitSet := New()
+
 	bitSet.SetRange(0, 20)
 	bitSet.ClearRange(5, 10)
-
-	setCount := bitSet.Cardinality()
-	if setCount != 15 {
-		t.Error("Number of set bits should be 15, got ",setCount)
-	}
+	assert.Equal(t, 15, bitSet.Cardinality())
 }
 
-func TestShouldFlipRangeOfBits(t *testing.T)  {
+func TestShouldFlipRangeOfBits(t *testing.T) {
 	bitSet := New()
 
 	bitSet.FlipRange(5, 10)
-	setCount := bitSet.Cardinality()
-	if setCount != 5 {
-		t.Error("Number of set bits should be 5, got ",setCount)
-	}
+	assert.Equal(t, 5, bitSet.Cardinality())
 
 	bitSet.FlipRange(5, 10)
-	setCount = bitSet.Cardinality()
-	if setCount != 0 {
-		t.Error("Number of set bits should be 0, got ",setCount)
-	}
+	assert.Equal(t, 0, bitSet.Cardinality())
 }

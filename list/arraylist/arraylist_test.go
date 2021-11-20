@@ -6,6 +6,11 @@ import (
 	"testing"
 )
 
+type testItem struct {
+	id   int
+	name string
+}
+
 func TestArrayListOperations(t *testing.T) {
 	arrayList := New()
 	assert.Equal(t, 0, arrayList.Size())
@@ -29,6 +34,22 @@ func TestArrayListOperations(t *testing.T) {
 	for arrayList.Size() > 0 {
 		arrayList.Remove(0)
 	}
+}
+
+func TestArrayListReturnsDistinctElements(t *testing.T) {
+	testItems := []testItem{{id: 1, name: "test1"}, {id: 2, name: "test2"}}
+	arrayList := New()
+
+	arrayList.Add(testItems[0])
+	arrayList.Add(testItems[1])
+	arrayList.Add(testItems[0])
+	arrayList.Add(testItems[1])
+	distinctItems := arrayList.GetDistinctItems()
+
+	assert.Equal(t, testItems[0], distinctItems.Get(0))
+	assert.Equal(t, testItems[1], distinctItems.Get(1))
+	assert.Equal(t, 2, distinctItems.Size())
+	assert.Equal(t, 4, arrayList.Size())
 }
 
 func assertIsSorted(t *testing.T, list *ArrayList) {

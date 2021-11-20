@@ -42,3 +42,15 @@ func (al *ArrayList) Size() int {
 func (al *ArrayList) Sort(comparator comparator.Comparator) {
 	sort.ListSort(comparator, al)
 }
+
+func (al *ArrayList) GetDistinctItems() *ArrayList {
+	distinctMap := make(map[interface{}]bool)
+	distinctItems := New()
+	for _, item := range al.items {
+		if exists := distinctMap[item]; !exists {
+			distinctMap[item] = true
+			distinctItems.Add(item)
+		}
+	}
+	return distinctItems
+}

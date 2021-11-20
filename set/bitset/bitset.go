@@ -5,7 +5,7 @@ import (
 )
 
 type BitSet struct {
-	bits big.Int
+	bits   big.Int
 	length int
 }
 
@@ -22,18 +22,18 @@ func (bs *BitSet) Add(bit uint) {
 	bs.length++
 }
 
-func (bs *BitSet) Get(index int) uint {
-	return bs.bits.Bit(index)
+func (bs *BitSet) Get(index int) int {
+	return int(bs.bits.Bit(index))
 }
 
 func (bs *BitSet) Set(index int) {
 	bs.bits.SetBit(&bs.bits, index, 1)
 	if index >= bs.length {
-		bs.length = index+1
+		bs.length = index + 1
 	}
 }
 
-func (bs *BitSet) SetRange(from int, to int) {
+func (bs *BitSet) SetRange(from, to int) {
 	for i := from; i < to; i++ {
 		bs.bits.SetBit(&bs.bits, i, 1)
 	}
@@ -46,13 +46,13 @@ func (bs *BitSet) Clear(index int) {
 	bs.bits.SetBit(&bs.bits, index, 0)
 }
 
-func (bs *BitSet) ClearRange(from int, to int) {
+func (bs *BitSet) ClearRange(from, to int) {
 	for i := from; i < to; i++ {
 		bs.bits.SetBit(&bs.bits, i, 0)
 	}
 }
 
-func (bs *BitSet) FlipRange(from int, to int) {
+func (bs *BitSet) FlipRange(from, to int) {
 	for i := from; i < to; i++ {
 		bs.Flip(i)
 	}
@@ -70,13 +70,13 @@ func (bs *BitSet) Flip(index int) {
 	}
 	bs.bits.SetBit(&bs.bits, index, bit)
 	if index >= bs.length {
-		bs.length = index+1
+		bs.length = index + 1
 	}
 }
 
 func (bs *BitSet) Cardinality() int {
 	setBits := 0
-	for i := 0; i< bs.length; i++ {
+	for i := 0; i < bs.length; i++ {
 		if bs.bits.Bit(i) == 1 {
 			setBits++
 		}
