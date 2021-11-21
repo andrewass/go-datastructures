@@ -38,3 +38,9 @@ func TestShouldReturnEmptyListWhenNumberContainsNoPrimes(t *testing.T)  {
 
 	assert.Equal(t, 0, primeFactors.Size())
 }
+
+func TestShouldReturnGreatestCommonDivisor(t *testing.T)  {
+	assert.Equal(t, int64(12), GreatestCommonDivisor(36, 24))
+	assert.Equal(t, int64(1), GreatestCommonDivisor(31, 11))
+	assert.Equal(t, int64(56), GreatestCommonDivisor(56, 56))
+}
