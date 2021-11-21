@@ -1,17 +1,18 @@
-# Go Data Structures
-Data Structures written in Go
+# Go Data Structures and Algorithms
+Data Structures and Algorithms written in Go
 
 ### Queue
 - [Priority Queue](https://github.com/andrewass/go-datastructures-algorithms/blob/main/queue/priorityqueue/priorityqueue.go)
 
 ### List
-- [Array List](https://github.com/andrewass/go-datastructures-algorithms/blob/main/list/arraylist/arraylist.go)
-- [Linked List](https://github.com/andrewass/go-datastructures-algorithms/blob/main/list/linkedlist/linkedlist.go)
+- [ArrayList](https://github.com/andrewass/go-datastructures-algorithms/blob/main/list/arraylist/arraylist.go)
+- [LinkedList](https://github.com/andrewass/go-datastructures-algorithms/blob/main/list/linkedlist/linkedlist.go)
 
 ### Set
-- [Bit Set](https://github.com/andrewass/go-datastructures-algorithms/blob/main/set/bitset/bitset.go)
-- [Disjoint Set](https://github.com/andrewass/go-datastructures-algorithms/blob/main/set/disjointset/disjointset.go)
-- [HashSet](https://github.com/andrewass/go-datastructures-algorithms/blob/main/set/hashset/hashset.go) 
+- [BitSet](https://github.com/andrewass/go-datastructures-algorithms/blob/main/set/bitset/bitset.go)
+- [DisjointSet](https://github.com/andrewass/go-datastructures-algorithms/blob/main/set/disjointset/disjointset.go)
+- [HashSet](https://github.com/andrewass/go-datastructures-algorithms/blob/main/set/hashset/hashset.go)
+- [MultiSet](https://github.com/andrewass/go-datastructures-algorithms/blob/main/set/multiset/multiset.go)
 
 ### Stack
 - [Stack](https://github.com/andrewass/go-datastructures-algorithms/blob/main/stack/stack.go)
