@@ -24,6 +24,9 @@ Data Structures and Algorithms written in Go
 - [Huffman Tree](https://github.com/andrewass/go-datastructures-algorithms/blob/main/string/huffmantree/huffmantree.go)
 - [Trie](https://github.com/andrewass/go-datastructures-algorithms/blob/main/string/trie/trie.go)
 
+### Graph
+- [Graph](https://github.com/andrewass/go-datastructures-algorithms/blob/main/graph/graph.go)
+
 ### Numbers
 - [Prime Factors](https://github.com/andrewass/go-datastructures-algorithms/blob/main/numbers/numbers.go)
 - [Greatest Common Divisor]()
