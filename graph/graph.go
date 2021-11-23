@@ -1,36 +1,51 @@
 package graph
 
-import "go-datastructures-algorithms/list/arraylist"
+import (
+	"go-datastructures-algorithms/list/arraylist"
+)
 
-type Node struct {
+type node struct {
 	item     interface{}
 	outEdges *arraylist.ArrayList
+	distance *int64
+	parent   *node
 }
 
-type Edge struct {
-	from   *Node
-	to     *Node
-	length int
+type edge struct {
+	from   *node
+	to     *node
+	weight *int64
 }
 
 type Graph struct {
-	nodes map[interface{}]*Node
+	nodes map[interface{}]*node
 	size  int
 }
 
 func New() *Graph {
-	return &Graph{nodes: make(map[interface{}]*Node)}
+	return &Graph{nodes: make(map[interface{}]*node)}
 }
 
-func (g *Graph) AddNode(key interface{}, item interface{}) {
-	node := &Node{item: item, outEdges: arraylist.New()}
+func (g *Graph) AddItem(key interface{}, item interface{}) {
+	node := &node{item: item, outEdges: arraylist.New()}
 	g.nodes[key] = node
 	g.size++
 }
 
-func (g *Graph) AddEdge(from interface{}, to interface{}, length int) {
+// AddEdge adds an edge between two items in the graph
+func (g *Graph) AddEdge(from interface{}, to interface{}, weight int64) {
 	fromNode := g.nodes[from]
 	toNode := g.nodes[to]
-	edge := &Edge{from: fromNode, to: toNode, length: length}
+	edge := &edge{from: fromNode, to: toNode, weight: &weight}
 	toNode.outEdges.Add(edge)
+}
+
+// GetDistance returns the shortest distance between two items in the graph.
+func (g *Graph) GetDistance(source, end interface{}) *int64 {
+	return nil
+}
+
+// GetDistanceToAll returns a list of nodes, each holding its shortest distance from the given source
+func (g *Graph) GetDistanceToAll(source interface{}) *arraylist.ArrayList {
+	return nil
 }
