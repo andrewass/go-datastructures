@@ -14,33 +14,29 @@ func distanceComparator(a, b interface{}) int {
 	return 0
 }
 
-func ShortestPath(source *node, graph *Graph) {
+func setShortestPath(source *node, graph *Graph) {
 	priQueue := priorityqueue.New(distanceComparator)
 	initializeGraph(source, graph)
-
-	for _, node := range graph.nodes {
-		priQueue.Insert(node)
-	}
+	priQueue.Insert(source)
 
 	for !priQueue.IsEmpty() {
 		current := priQueue.PollMin().(*node)
-
 		for i := 0; i < current.outEdges.Size(); i++ {
 			edge := current.outEdges.Get(i).(*edge)
 			distance := *current.distance + *edge.weight
 			if distance < *edge.to.distance {
 				edge.to.distance = &distance
 				edge.to.parent = current
+				priQueue.Insert(edge.to)
 			}
 		}
 	}
 }
 
 func initializeGraph(source *node, graph *Graph) {
-	var maxValue int64 = 100000000000
 	var zeroDistance int64 = 0
 	for _, node := range graph.nodes {
-		node.distance = &maxValue
+		node.distance = getMaxDistance()
 		if node == source {
 			node.distance = &zeroDistance
 		}

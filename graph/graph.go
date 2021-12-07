@@ -45,8 +45,16 @@ func (g *Graph) AddEdge(fromKey interface{}, toKey interface{}, weight int64) {
 }
 
 // GetShortestDistance returns the shortest distance between two items in the graph.
-func (g *Graph) GetShortestDistance(source, end interface{}) *int64 {
-	return nil
+// If no path exists between source and destination, nil is returned
+func (g *Graph) GetShortestDistance(sourceKey, destinationKey interface{}) *int64 {
+	sourceNode := g.nodes[sourceKey]
+	endNode := g.nodes[destinationKey]
+	setShortestPath(sourceNode, g)
+
+	if *endNode.distance == *getMaxDistance(){
+		return nil
+	}
+	return endNode.distance
 }
 
 // GetShortestDistanceToAll returns a list of nodes, each holding its shortest distance from the given source
@@ -81,4 +89,9 @@ func (g *Graph) clearVisitedFlags() {
 	for _, node := range g.nodes {
 		node.visited = false
 	}
+}
+
+func getMaxDistance() *int64 {
+	var maxValue int64 = 100000000000
+	return &maxValue
 }
