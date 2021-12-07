@@ -12,6 +12,7 @@ type node struct {
 	distance *int64
 	parent   *node
 	visited  bool
+	tempVisited bool
 }
 
 type edge struct {
@@ -60,6 +61,10 @@ func (g *Graph) GetShortestDistance(sourceKey, destinationKey interface{}) *int6
 // GetShortestDistanceToAll returns a list of nodes, each holding its shortest distance from the given source
 func (g *Graph) GetShortestDistanceToAll(source interface{}) *arraylist.ArrayList {
 	return nil
+}
+
+func (g *Graph) GetTopologicalOrder() *arraylist.ArrayList {
+	return topologicalSort(g)
 }
 
 // ExistsPath return true if there exists a path from source to end node

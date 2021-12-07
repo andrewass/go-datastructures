@@ -31,6 +31,12 @@ func (al *ArrayList) Replace(index int, item interface{}) {
 	al.items[index] = item
 }
 
+func (al *ArrayList) Reverse()  {
+	for i := 0; i < al.Size()/2 ; i++ {
+		al.Swap(i, al.Size()-1-i)
+	}
+}
+
 func (al *ArrayList) Swap(indexA, indexB int) {
 	al.items[indexB], al.items[indexA] = al.items[indexA], al.items[indexB]
 }

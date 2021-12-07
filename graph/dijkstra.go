@@ -16,7 +16,7 @@ func distanceComparator(a, b interface{}) int {
 
 func setShortestPath(source *node, graph *Graph) {
 	priQueue := priorityqueue.New(distanceComparator)
-	initializeGraph(source, graph)
+	initializeGraphShortestPath(source, graph)
 	priQueue.Insert(source)
 
 	for !priQueue.IsEmpty() {
@@ -33,7 +33,7 @@ func setShortestPath(source *node, graph *Graph) {
 	}
 }
 
-func initializeGraph(source *node, graph *Graph) {
+func initializeGraphShortestPath(source *node, graph *Graph) {
 	var zeroDistance int64 = 0
 	for _, node := range graph.nodes {
 		node.distance = getMaxDistance()
