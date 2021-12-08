@@ -10,17 +10,18 @@ func edgeComparator(a, b interface{}) int {
 	edgeB := b.(*edge)
 	if *edgeA.weight < *edgeB.weight {
 		return -1
+	} else if *edgeA.weight > *edgeB.weight {
+		return 1
 	}
 	return 0
 }
 
-
-func getMinimumSpanningTreeWeight(graph *Graph) int64  {
+func getMinimumSpanningTreeWeight(graph *Graph) int64 {
 	var sum int64 = 0
 	nodeSet := disjointset.New()
 	priQueue := priorityqueue.New(edgeComparator)
 
-	for _,node := range graph.nodes{
+	for _, node := range graph.nodes {
 		nodeSet.AddItem(node.key, node)
 		for i := 0; i < node.outEdges.Size(); i++ {
 			priQueue.Insert(node.outEdges.Get(i))

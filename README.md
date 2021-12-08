@@ -28,6 +28,7 @@ Data Structures and Algorithms written in Go
 - [Graph](https://github.com/andrewass/go-datastructures-algorithms/blob/main/graph/graph.go)
 - [Dijkstra's Algorithm](https://github.com/andrewass/go-datastructures-algorithms/blob/main/graph/dijkstra.go)
 - [Topological Sort](https://github.com/andrewass/go-datastructures-algorithms/blob/main/graph/topologicalsort.go)
+- [Minimum Spanning Tree](https://github.com/andrewass/go-datastructures-algorithms/blob/main/graph/kruskal.go)
 
 ### Numbers
 - [Prime Factors](https://github.com/andrewass/go-datastructures-algorithms/blob/main/numbers/numbers.go)
