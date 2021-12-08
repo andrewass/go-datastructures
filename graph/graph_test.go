@@ -85,3 +85,18 @@ func TestShouldFindTopologicalOrderOfGraph(t *testing.T) {
 	assert.Equal(t, testItems[2], topologicalOrder.Get(4))
 	assert.Equal(t, testItems[0], topologicalOrder.Get(5))
 }
+
+func TestShouldPanicWhenTryingToTopologicalSortCyclicGraph(t *testing.T){
+	graph := New()
+	for _, item := range testItems {
+		graph.AddItem(item.id, item)
+	}
+	graph.AddEdge(testItems[0].id, testItems[1].id, 10)
+	graph.AddEdge(testItems[1].id, testItems[2].id, 5)
+	graph.AddEdge(testItems[2].id, testItems[3].id, 2)
+	graph.AddEdge(testItems[3].id, testItems[4].id, 1)
+	graph.AddEdge(testItems[4].id, testItems[5].id, 3)
+	graph.AddEdge(testItems[5].id, testItems[0].id, 3)
+
+	assert.PanicsWithValue(t, "Unable to sort a graph with a cycle", func() {graph.GetTopologicalOrder()})
+}

@@ -67,6 +67,10 @@ func (g *Graph) GetTopologicalOrder() *arraylist.ArrayList {
 	return topologicalSort(g)
 }
 
+func (g *Graph) GetMinimumSpanningDistance() int64 {
+	return getMinimumSpanningTreeWeight(g)
+}
+
 // ExistsPath return true if there exists a path from source to end node
 func (g *Graph) ExistsPath(fromKey, toKey interface{}) bool {
 	sourceNode := g.nodes[fromKey]
